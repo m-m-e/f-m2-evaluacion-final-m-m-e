@@ -17,8 +17,13 @@ const showSeries = array => {
     newTitle.classList.add('title');
     const newTitleContent = document.createTextNode(thisSeries.name);
 
+    const newImage = document.createElement('img');
+    newImage.classList.add('image');
+    newImage.setAttribute('src', thisSeries.image);
+
     newTitle.appendChild(newTitleContent);
     newCard.appendChild(newTitle);
+    newCard.appendChild(newImage);
     results.appendChild(newCard);
   }
 };

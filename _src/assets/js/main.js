@@ -6,6 +6,14 @@ const button = document.querySelector('.btn');
 const results = document.querySelector('.results');
 const api = 'http://api.tvmaze.com/search/shows?q=';
 
+//function to add listeners to checkboxes
+const checkboxListener = () => {
+  const allCheckboxes = document.querySelectorAll('.checkbox');
+  for (const checkbox of allCheckboxes) {
+    checkbox.addEventListener('change', showFavorites);
+  }
+};
+
 
 //function to print series WITHIN CONTAINER
 const showSeries = array => {
@@ -31,31 +39,25 @@ const showSeries = array => {
     const newCheckbox = document.createElement('input');
     newCheckbox.classList.add('checkbox');
     newCheckbox.setAttribute('type', 'checkbox');
-
+    
+    
     newTitle.appendChild(newTitleContent);
     newCard.appendChild(newTitle);
     newCard.appendChild(newImage);
     newCard.appendChild(newCheckbox);
     results.appendChild(newCard);
   }
+  checkboxListener();
 };
 
 //function to apply style changes to favourites
 const showFavorites = () => {
   const allResults = document.querySelectorAll('.results-card');
-  console.log(allResults);
+  // console.log(allResults);
   for (let i = 0; i <allResults.length; i++) {
     if (allResults[i].childNodes[2].checked) {
       allResults[i].classList.add('favourite');
     }
-  }
-};
-
-//function to add listeners to checkboxes
-const checkboxListener = () => {
-  const allCheckboxes = document.querySelectorAll('.checkbox');
-  for (const checkbox of allCheckboxes) {
-    checkbox.addEventListener('change', showFavorites);
   }
 };
 

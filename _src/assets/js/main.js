@@ -93,10 +93,14 @@ const getSeries = () => {
 //function to save favourites 
 const saveFavorites = series => {
   const favouritesList = [];
-  console.log(series.childNodes[0]);
-  // if (series.childNodes[1]){
-
-  // };
+  const seriesItem = series.childNodes;
+  console.log(seriesItem[0]);
+  if (favouritesList.includes(seriesItem[0])){
+    console.log('This is already saved');
+  }
+  else {
+    console.log('This needs saving');
+  }
 };
 
 //add listener to button

@@ -11,12 +11,12 @@ let favoritesList = [];
 
 
 //function to add listeners to checkboxes
-const checkboxListener = () => {
-  const allCheckboxes = document.querySelectorAll('.checkbox');
-  for (const checkbox of allCheckboxes) {
-    checkbox.addEventListener('change', makeFavorites);
-  }
-};
+// const checkboxListener = () => {
+//   const allCheckboxes = document.querySelectorAll('.checkbox');
+//   for (const checkbox of allCheckboxes) {
+//     checkbox.addEventListener('change', makeFavorites);
+//   }
+// };
 
 
 //function to print series WITHIN CONTAINER
@@ -40,49 +40,58 @@ const showSeries = array => {
     }
     else {
       newImage.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV');
-    }
-
-    const newCheckbox = document.createElement('input');
-    newCheckbox.classList.add('checkbox');
-    newCheckbox.setAttribute('type', 'checkbox');
-    
+    }    
     
     newTitle.appendChild(newTitleContent);
     newCard.appendChild(newTitle);
     newCard.appendChild(newImage);
-    newCard.appendChild(newCheckbox);
+    newCard.addEventListener('click', handler);
+    
     results.appendChild(newCard);
   }
-  checkboxListener();
+  // checkboxListener();
+};
+
+const handler = () => {
+  makeFavorites(event);
 };
 
 //function to apply style changes to favourites and save in an array
-const makeFavorites = () => {
-  const allResults = document.querySelectorAll('.results-card');
-
-  // console.log(allResults);
-  const newFavoritesList = [];
-  for (let i = 0; i <allResults.length; i++) {
-    const seriesItem = allResults[i];
-    const newSeries = {
-      title: seriesItem.childNodes[0].innerHTML,
-      image: seriesItem.childNodes[1].src
-    };
-    if (seriesItem.childNodes[2].checked) {
-      seriesItem.classList.add('favorite');
-      newFavoritesList.push(newSeries);
-      console.log(newFavoritesList);
-    }
-    else {
-      seriesItem.classList.remove('favorite');
-    }
-  }
+const makeFavorites = event => {
+  const target = event.currentTarget;
+  console.log(target);
+  target.classList.toggle('favorite');
   
-  checkFavorites();
-  favoritesList = [...newFavoritesList, ...favoritesList];
+  if (target.classList.contains('favorite')) {
+    console.log(target, 'is a fave');
+    favoritesList.push(target);
+  }
+  else {
+    favoritesList.pop(target);
+  }
   console.log(favoritesList);
-  printFavorites(favoritesList);
-  saveFavorites(favoritesList);
+  // const newFavoritesList = [];
+  // for (let i = 0; i <allResults.length; i++) {
+  //   const seriesItem = allResults[i];
+  //   const newSeries = {
+  //     title: seriesItem.childNodes[0].innerHTML,
+  //     image: seriesItem.childNodes[1].src
+  //   };
+  //   if (seriesItem.childNodes[2].checked) {
+  //     seriesItem.classList.add('favorite');
+  //     newFavoritesList.push(newSeries);
+  //     console.log(newFavoritesList);
+  //   }
+  //   else {
+  //     seriesItem.classList.remove('favorite');
+  //   }
+  // }
+  
+  // checkFavorites();
+  // favoritesList = [...newFavoritesList, ...favoritesList];
+  // console.log(favoritesList);
+  // printFavorites(favoritesList);
+  // saveFavorites(favoritesList);
 };
 
 //function to see if saved data

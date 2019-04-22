@@ -1,12 +1,14 @@
 'use strict';
 
 //elements to use
-input
-button
-results
+const input = document.querySelector('#search');
+const button = document.querySelector('.btn');
+const results = document.querySelector('.results');
 
 //function to get input text
-
+const getSearchText = () => {
+  console.log(input.value);
+};
 
 //function to fetch data
 
@@ -24,3 +26,5 @@ results
 
 
 //add listener to button
+
+button.addEventListener('click', getSearchText);

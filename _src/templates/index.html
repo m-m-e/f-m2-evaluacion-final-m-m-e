@@ -7,10 +7,19 @@
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-  <div class="page">
-    <partial src="_header.html" label="Header"></partial>
-    <partial src="_main.html" label="Main"></partial>
-  </div>
+  <main class="page">
+    <h1 class="title">Buscador de series</h1>
+
+    <div class="search-box">
+      <label for="search">Buscar un serie aquí:</label>
+      <input type="text" id="search">
+
+      <button class="btn">Buscar</button>
+    </div>
+
+    <div class="results"></div>
+    
+  </main>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

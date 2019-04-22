@@ -4,6 +4,7 @@
 const input = document.querySelector('#search');
 const button = document.querySelector('.btn');
 const results = document.querySelector('.results');
+const favorites = document.querySelector('.favorites');
 const api = 'http://api.tvmaze.com/search/shows?q=';
 
 //function to add listeners to checkboxes
@@ -52,7 +53,7 @@ const showSeries = array => {
   checkboxListener();
 };
 
-//function to apply style changes to favourites and call save function
+//function to apply style changes to favourites save in an array
 const makeFavorites = () => {
   const allResults = document.querySelectorAll('.results-card');
 
@@ -61,20 +62,41 @@ const makeFavorites = () => {
   for (let i = 0; i <allResults.length; i++) {
     const seriesItem = allResults[i];
     const newSeries = {
-      id: seriesItem.id,
       title: seriesItem.childNodes[0].innerHTML,
       image: seriesItem.childNodes[1].src
     };
     if (seriesItem.childNodes[2].checked) {
       seriesItem.classList.add('favorite');
-      console.log('favourites:', favoritesList);
       favoritesList.push(newSeries);
     }
     else {
       seriesItem.classList.remove('favorite');
     }
   }
+  printFavorites(favoritesList);
 };
+
+const printFavorites = list => {
+  favorites.innerHTML = '';
+  for (const item of list) {
+    const newFave = document.createElement('li');
+    newFave.classList.add('fave');
+    const newFaveTitle = document.createElement('h3');
+    newFaveTitle.classList.add('fave-title');
+    const newFaveTitleContent = document.createTextNode(item.title);
+
+    const newFaveImage = document.createElement('img');
+    newFaveImage.classList.add('fave-image');
+    newFaveImage.style = 'height: 200px';
+    newFaveImage.setAttribute('src', item.image);
+    newFaveImage.setAttribute('alt', item.title);
+
+    newFaveTitle.appendChild(newFaveTitleContent);
+    newFave.appendChild(newFaveImage);
+    newFave.appendChild(newFaveTitle);
+    favorites.appendChild(newFave);
+  }
+}
 
 
 //function to fetch data

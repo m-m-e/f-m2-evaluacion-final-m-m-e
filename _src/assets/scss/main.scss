@@ -7,6 +7,15 @@ body {
 	background: $color-white; 
 }
 
+.page {
+	display: flex;
+	flex-direction: column;
+}
+
+.results-box {
+	display: flex;
+}
+
 .results-card {
 	color: $color-lightpink;
 	background: $color-purple;	

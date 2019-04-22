@@ -5,6 +5,7 @@ const input = document.querySelector('#search');
 const button = document.querySelector('.btn');
 const results = document.querySelector('.results');
 const api = 'http://api.tvmaze.com/search/shows?q=';
+const favouritesList = [];
 
 //function to add listeners to checkboxes
 const checkboxListener = () => {
@@ -57,12 +58,35 @@ const makeFavorites = () => {
   for (let i = 0; i <allResults.length; i++) {
     const seriesItem = allResults[i];
     if (seriesItem.childNodes[2].checked) {
-      seriesItem.classList.toggle('favorite');
-      saveFavorites(seriesItem);
+      seriesItem.classList.add('favorite');
+      // saveFavorites(seriesItem);
     }
     else {
       seriesItem.classList.remove('favorite');
     }
+  }
+};
+
+//function to save favourites 
+const saveFavorites = series => {
+  const seriesItem = series.childNodes;
+  console.log(seriesItem[0].innerHTML);
+  // console.log(favouritesList.length);
+  if (favouritesList.length !== 0 && favouritesList.includes(seriesItem[0].innerHTML)){
+    console.log(favouritesList);
+
+    console.log('This is already saved');
+  }
+  else {
+    console.log('This needs saving');
+    const seriesName = seriesItem[0].innerHTML;
+    const seriesImage = seriesItem[1].src;
+    const seriesObj = {};
+  
+    seriesObj.name = seriesName;
+    seriesObj.image = seriesImage;
+    favouritesList.push(seriesObj);
+    console.log(favouritesList);
   }
 };
 
@@ -89,29 +113,6 @@ const getSeries = () => {
     });
 };
 
-
-//function to save favourites 
-const saveFavorites = series => {
-  const favouritesList = [];
-  const seriesItem = series.childNodes;
-  console.log(seriesItem);
-
-  
-  if (favouritesList.includes(seriesItem[0])){
-    console.log('This is already saved');
-  }
-  else {
-    console.log('This needs saving');
-    const seriesName = seriesItem[0].innerHTML;
-    const seriesImage = seriesItem[1].src;
-    const seriesObj = {};
-  
-    seriesObj.name = seriesName;
-    seriesObj.image = seriesImage;
-    favouritesList.push(seriesObj);
-    console.log(favouritesList);
-  }
-};
 
 //add listener to button
 

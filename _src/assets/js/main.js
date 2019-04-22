@@ -73,31 +73,31 @@ const saveFavorites = series => {
   const seriesItem = series.childNodes;
   // console.log(seriesItem[0].innerHTML);
   // console.log(favouritesList.length);
-  // if (favouritesList.length !== 0 && favouritesList.includes(seriesItem[0].innerHTML)){
   if (favouritesList.length !== 0){
     console.log(favouritesList.length);
-    for (let i=0; i < favouritesList.length; i++) {
-      if (favouritesList[i].name === seriesItem[0].innerHTML) {
-        console.log('Already got this');
-      }
-      else {
-        console.log('This needs saving');
-        const seriesName = seriesItem[0].innerHTML;
-        const seriesImage = seriesItem[1].src;
-        const seriesObj = {};
-  
-        seriesObj.name = seriesName;
-        seriesObj.image = seriesImage;
-        favouritesList.push(seriesObj);
-        console.log(favouritesList);
-      }
-
+    const favourites = favouritesList.values();
+    // for (const item of favouritesList) {
+    if (favourites.includes(seriesItem[0].innerHTML)) {
+      console.log('Already got this', seriesItem[0].innerHTML);
     }
+    // else {
+    //   console.log('This needs saving', seriesItem[0].innerHTML);
+    //   const seriesName = seriesItem[0].innerHTML;
+    //   const seriesImage = seriesItem[1].src;
+    //   const seriesObj = {};
+  
+    //   seriesObj.name = seriesName;
+    //   seriesObj.image = seriesImage;
+    //   favouritesList.push(seriesObj);
+    //   console.log(favouritesList);
+    // }
+
+    // }
 
     // console.log('This is already saved');
   }
   else {
-    console.log('This needs saving');
+    console.log('Lets start saving', seriesItem[0].innerHTML);
     const seriesName = seriesItem[0].innerHTML;
     const seriesImage = seriesItem[1].src;
     const seriesObj = {};

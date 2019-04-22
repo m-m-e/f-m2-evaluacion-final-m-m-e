@@ -7,6 +7,22 @@ const results = document.querySelector('.results');
 const api = 'http://api.tvmaze.com/search/shows?q=';
 
 
+//function to print series WITHIN CONTAINER
+const showSeries = array => {
+  for (let i=0; i< array.length; i++) {
+    const thisSeries = array[i];
+    const newCard = document.createElement('div');
+    newCard.classList.add('results-card');
+    const newTitle = document.createElement('h2');
+    newTitle.classList.add('title');
+    const newTitleContent = document.createTextNode(thisSeries.name);
+
+    newTitle.appendChild(newTitleContent);
+    newCard.appendChild(newTitle);
+    results.appendChild(newCard);
+  }
+};
+
 //function to fetch data
 const getSeries = () => {
   const search = input.value;
@@ -25,10 +41,10 @@ const getSeries = () => {
         seriesData.push(series);
       }
       console.log(seriesData);
+      showSeries(seriesData);
     });
 };
 
-//function to print series WITHIN CONTAINER
 
 
 //function to add checkbox for favourites

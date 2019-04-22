@@ -6,7 +6,9 @@ const button = document.querySelector('.btn');
 const results = document.querySelector('.results');
 const favorites = document.querySelector('.favorites');
 const api = 'http://api.tvmaze.com/search/shows?q=';
+const savedFavorites = JSON.parse(localStorage.getItem('favorites'));
 let favoritesList = [];
+
 
 //function to add listeners to checkboxes
 const checkboxListener = () => {
@@ -54,7 +56,7 @@ const showSeries = array => {
   checkboxListener();
 };
 
-//function to apply style changes to favourites save in an array
+//function to apply style changes to favourites and save in an array
 const makeFavorites = () => {
   const allResults = document.querySelectorAll('.results-card');
 
@@ -69,14 +71,29 @@ const makeFavorites = () => {
     if (seriesItem.childNodes[2].checked) {
       seriesItem.classList.add('favorite');
       newFavoritesList.push(newSeries);
+      console.log(newFavoritesList);
     }
     else {
       seriesItem.classList.remove('favorite');
     }
   }
-  favoritesList = [...favoritesList, ...newFavoritesList];
+  
+  checkFavorites();
+  favoritesList = [...newFavoritesList, ...favoritesList];
   console.log(favoritesList);
   printFavorites(favoritesList);
+  saveFavorites(favoritesList);
+};
+
+//function to see if saved data
+const checkFavorites = () => {
+  if (savedFavorites) {
+    let favoritesList = [savedFavorites];
+    return favoritesList;
+  }
+  else {
+    return favoritesList;
+  }
 };
 
 const printFavorites = list => {
@@ -99,6 +116,10 @@ const printFavorites = list => {
     newFave.appendChild(newFaveTitle);
     favorites.appendChild(newFave);
   }
+};
+
+const saveFavorites = list => {
+  localStorage.setItem('favorites', JSON.stringify(list));
 };
 
 

@@ -1,1 +1,1 @@
-body {background: url("../images/logo-adalab-80px.png") center center no-repeat #f3f4f5;height: 100vh;}
+body {margin: 0;color: #000;font-family: Arial, Helvetica, sans-serif;background: #fff;}.page {display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;flex-direction: column;}.results-box {display: -webkit-box;display: -ms-flexbox;display: flex;}.results-card {color: #ffb6c1;background: purple;}.favorite {color: purple;background: #ffb6c1;}

@@ -19,7 +19,13 @@ const showSeries = array => {
 
     const newImage = document.createElement('img');
     newImage.classList.add('image');
-    newImage.setAttribute('src', thisSeries.image);
+    newImage.style = 'height: 200px';
+    if (thisSeries.image) {
+      newImage.setAttribute('src', thisSeries.image);
+    }
+    else {
+      newImage.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV');
+    }
 
     newTitle.appendChild(newTitleContent);
     newCard.appendChild(newTitle);
@@ -37,12 +43,14 @@ const getSeries = () => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      // console.log(data);
+      console.log(data);
       for (let i = 0; i < data.length; i++) {
         const item = data[i].show;
         const series = {};
         series.name = item.name;
-        series.image = item.image.original;
+        if (item.image !== null) {
+          series.image = item.image.original;
+        }
         seriesData.push(series);
       }
       console.log(seriesData);

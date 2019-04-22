@@ -10,7 +10,7 @@ const api = 'http://api.tvmaze.com/search/shows?q=';
 const checkboxListener = () => {
   const allCheckboxes = document.querySelectorAll('.checkbox');
   for (const checkbox of allCheckboxes) {
-    checkbox.addEventListener('change', showFavorites);
+    checkbox.addEventListener('change', makeFavorites);
   }
 };
 
@@ -50,16 +50,18 @@ const showSeries = array => {
   checkboxListener();
 };
 
-//function to apply style changes to favourites
-const showFavorites = () => {
+//function to apply style changes to favourites and call save function
+const makeFavorites = () => {
   const allResults = document.querySelectorAll('.results-card');
   // console.log(allResults);
   for (let i = 0; i <allResults.length; i++) {
-    if (allResults[i].childNodes[2].checked) {
-      allResults[i].classList.toggle('favorite');
+    const seriesItem = allResults[i];
+    if (seriesItem.childNodes[2].checked) {
+      seriesItem.classList.toggle('favorite');
+      saveFavorites(seriesItem);
     }
     else {
-      allResults[i].classList.remove('favorite');
+      seriesItem.classList.remove('favorite');
     }
   }
 };
@@ -89,7 +91,10 @@ const getSeries = () => {
 
 
 //function to save favourites 
-
+const saveFavorites = series => {
+  const favouritesList = [];
+  console.log(series);
+};
 
 //add listener to button
 

@@ -4,14 +4,17 @@
 const input = document.querySelector('#search');
 const button = document.querySelector('.btn');
 const results = document.querySelector('.results');
+const api = 'http://api.tvmaze.com/search/shows?q=';
 
-//function to get input text
-const getSearchText = () => {
-  console.log(input.value);
-};
 
 //function to fetch data
-
+const getSeries = () => {
+  const search = input.value;
+  const url = `${api}${search}`;
+  console.log(url);
+  const seriesData = [];
+  // fetch()
+};
 
 //function to print series WITHIN CONTAINER
 
@@ -27,4 +30,4 @@ const getSearchText = () => {
 
 //add listener to button
 
-button.addEventListener('click', getSearchText);
+button.addEventListener('click', getSeries);

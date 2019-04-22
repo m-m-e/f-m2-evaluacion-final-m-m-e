@@ -28,9 +28,14 @@ const showSeries = array => {
       newImage.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV');
     }
 
+    const newCheckbox = document.createElement('input');
+    newCheckbox.classList.add('checkbox');
+    newCheckbox.setAttribute('type', 'checkbox');
+
     newTitle.appendChild(newTitleContent);
     newCard.appendChild(newTitle);
     newCard.appendChild(newImage);
+    newCard.appendChild(newCheckbox);
     results.appendChild(newCard);
   }
 };
@@ -56,15 +61,18 @@ const getSeries = () => {
       }
       console.log('array of series', seriesData);
       showSeries(seriesData);
+      showFavorites();
     });
 };
 
-
-
-//function to add checkbox for favourites
-
-
 //function to apply style changes to favourites
+const showFavorites = () => {
+  const allResults = document.querySelectorAll('.results-card');
+  console.log(allResults);
+  for (let i = 0; i <allResults.length; i++) {
+    console.log(allResults[i].childNodes);
+  }
+};
 
 
 //function to save favourites 

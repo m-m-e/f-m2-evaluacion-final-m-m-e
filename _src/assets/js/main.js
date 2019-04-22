@@ -40,11 +40,29 @@ const showSeries = array => {
   }
 };
 
+//function to apply style changes to favourites
+const showFavorites = () => {
+  const allResults = document.querySelectorAll('.results-card');
+  console.log(allResults);
+  for (let i = 0; i <allResults.length; i++) {
+    if (allResults[i].childNodes[2].checked) {
+      allResults[i].classList.add('favourite');
+    }
+  }
+};
+
+//function to add listeners to checkboxes
+const checkboxListener = () => {
+  const allCheckboxes = document.querySelectorAll('.checkbox');
+  for (const checkbox of allCheckboxes) {
+    checkbox.addEventListener('change', showFavorites);
+  }
+};
+
 //function to fetch data
 const getSeries = () => {
   const search = input.value;
   const url = `${api}${search}`;
-  console.log(url);
   const seriesData = [];
   fetch(url)
     .then(response => response.json())
@@ -61,17 +79,7 @@ const getSeries = () => {
       }
       console.log('array of series', seriesData);
       showSeries(seriesData);
-      showFavorites();
     });
-};
-
-//function to apply style changes to favourites
-const showFavorites = () => {
-  const allResults = document.querySelectorAll('.results-card');
-  console.log(allResults);
-  for (let i = 0; i <allResults.length; i++) {
-    console.log(allResults[i].childNodes);
-  }
 };
 
 

@@ -16,10 +16,13 @@ const getSeries = () => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      // console.log(data);
       for (let i = 0; i < data.length; i++) {
-        // console.log(data[i].show);
-        seriesData.push(data[i].show);
+        const item = data[i].show;
+        const series = {};
+        series.name = item.name;
+        series.image = item.image.original;
+        seriesData.push(series);
       }
       console.log(seriesData);
     });

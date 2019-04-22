@@ -13,7 +13,16 @@ const getSeries = () => {
   const url = `${api}${search}`;
   console.log(url);
   const seriesData = [];
-  // fetch()
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      for (let i = 0; i < data.length; i++) {
+        // console.log(data[i].show);
+        seriesData.push(data[i].show);
+      }
+      console.log(seriesData);
+    });
 };
 
 //function to print series WITHIN CONTAINER

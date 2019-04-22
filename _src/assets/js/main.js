@@ -18,6 +18,7 @@ const checkboxListener = () => {
 
 //function to print series WITHIN CONTAINER
 const showSeries = array => {
+  results.innerHTML = '';
   for (let i=0; i< array.length; i++) {
     const thisSeries = array[i];
     const newCard = document.createElement('li');
@@ -59,7 +60,7 @@ const makeFavorites = () => {
     const seriesItem = allResults[i];
     if (seriesItem.childNodes[2].checked) {
       seriesItem.classList.add('favorite');
-      // saveFavorites(seriesItem);
+      saveFavorites(seriesItem);
     }
     else {
       seriesItem.classList.remove('favorite');
@@ -70,12 +71,30 @@ const makeFavorites = () => {
 //function to save favourites 
 const saveFavorites = series => {
   const seriesItem = series.childNodes;
-  console.log(seriesItem[0].innerHTML);
+  // console.log(seriesItem[0].innerHTML);
   // console.log(favouritesList.length);
-  if (favouritesList.length !== 0 && favouritesList.includes(seriesItem[0].innerHTML)){
-    console.log(favouritesList);
+  // if (favouritesList.length !== 0 && favouritesList.includes(seriesItem[0].innerHTML)){
+  if (favouritesList.length !== 0){
+    console.log(favouritesList.length);
+    for (let i=0; i < favouritesList.length; i++) {
+      if (favouritesList[i].name === seriesItem[0].innerHTML) {
+        console.log('Already got this');
+      }
+      else {
+        console.log('This needs saving');
+        const seriesName = seriesItem[0].innerHTML;
+        const seriesImage = seriesItem[1].src;
+        const seriesObj = {};
+  
+        seriesObj.name = seriesName;
+        seriesObj.image = seriesImage;
+        favouritesList.push(seriesObj);
+        console.log(favouritesList);
+      }
 
-    console.log('This is already saved');
+    }
+
+    // console.log('This is already saved');
   }
   else {
     console.log('This needs saving');

@@ -93,9 +93,17 @@ const getSeries = () => {
 //function to save favourites 
 const saveFavorites = series => {
   const favouritesList = [];
-  console.log(series);
+  console.log(series.childNodes[0]);
+  // if (series.childNodes[1]){
+
+  // };
 };
 
 //add listener to button
 
 button.addEventListener('click', getSeries);
+input.addEventListener('keyup',function(e){
+  if (e.keyCode === 13) {
+    getSeries();
+  }
+});

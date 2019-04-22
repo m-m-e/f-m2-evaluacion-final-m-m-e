@@ -5,7 +5,6 @@ const input = document.querySelector('#search');
 const button = document.querySelector('.btn');
 const results = document.querySelector('.results');
 const api = 'http://api.tvmaze.com/search/shows?q=';
-const favouritesList = [];
 
 //function to add listeners to checkboxes
 const checkboxListener = () => {
@@ -23,6 +22,7 @@ const showSeries = array => {
     const thisSeries = array[i];
     const newCard = document.createElement('li');
     newCard.classList.add('results-card');
+    newCard.setAttribute('data-id', i);
     const newTitle = document.createElement('h2');
     newTitle.classList.add('title');
     const newTitleContent = document.createTextNode(thisSeries.name);
@@ -55,12 +55,20 @@ const showSeries = array => {
 //function to apply style changes to favourites and call save function
 const makeFavorites = () => {
   const allResults = document.querySelectorAll('.results-card');
+
   // console.log(allResults);
+  const favoritesList = [];
   for (let i = 0; i <allResults.length; i++) {
     const seriesItem = allResults[i];
+    const newSeries = {
+      id: seriesItem.id,
+      title: seriesItem.childNodes[0].innerHTML,
+      image: seriesItem.childNodes[1].src
+    };
     if (seriesItem.childNodes[2].checked) {
       seriesItem.classList.add('favorite');
-      saveFavorites(seriesItem);
+      console.log('favourites:', favoritesList);
+      favoritesList.push(newSeries);
     }
     else {
       seriesItem.classList.remove('favorite');
@@ -68,46 +76,6 @@ const makeFavorites = () => {
   }
 };
 
-//function to save favourites 
-const saveFavorites = series => {
-  const seriesItem = series.childNodes;
-  // console.log(seriesItem[0].innerHTML);
-  // console.log(favouritesList.length);
-  if (favouritesList.length !== 0){
-    console.log(favouritesList.length);
-    const favourites = favouritesList.values();
-    // for (const item of favouritesList) {
-    if (favourites.includes(seriesItem[0].innerHTML)) {
-      console.log('Already got this', seriesItem[0].innerHTML);
-    }
-    // else {
-    //   console.log('This needs saving', seriesItem[0].innerHTML);
-    //   const seriesName = seriesItem[0].innerHTML;
-    //   const seriesImage = seriesItem[1].src;
-    //   const seriesObj = {};
-  
-    //   seriesObj.name = seriesName;
-    //   seriesObj.image = seriesImage;
-    //   favouritesList.push(seriesObj);
-    //   console.log(favouritesList);
-    // }
-
-    // }
-
-    // console.log('This is already saved');
-  }
-  else {
-    console.log('Lets start saving', seriesItem[0].innerHTML);
-    const seriesName = seriesItem[0].innerHTML;
-    const seriesImage = seriesItem[1].src;
-    const seriesObj = {};
-  
-    seriesObj.name = seriesName;
-    seriesObj.image = seriesImage;
-    favouritesList.push(seriesObj);
-    console.log(favouritesList);
-  }
-};
 
 //function to fetch data
 const getSeries = () => {

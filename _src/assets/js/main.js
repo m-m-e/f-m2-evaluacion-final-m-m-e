@@ -20,6 +20,7 @@ const showSeries = array => {
     const newImage = document.createElement('img');
     newImage.classList.add('image');
     newImage.style = 'height: 200px';
+    newImage.setAttribute('alt', thisSeries.name);
     if (thisSeries.image) {
       newImage.setAttribute('src', thisSeries.image);
     }
@@ -43,7 +44,7 @@ const getSeries = () => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      console.log(data);
+      // console.log(data);
       for (let i = 0; i < data.length; i++) {
         const item = data[i].show;
         const series = {};
@@ -53,7 +54,7 @@ const getSeries = () => {
         }
         seriesData.push(series);
       }
-      console.log(seriesData);
+      console.log('array of series', seriesData);
       showSeries(seriesData);
     });
 };

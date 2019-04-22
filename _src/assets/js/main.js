@@ -19,7 +19,7 @@ const checkboxListener = () => {
 const showSeries = array => {
   for (let i=0; i< array.length; i++) {
     const thisSeries = array[i];
-    const newCard = document.createElement('div');
+    const newCard = document.createElement('li');
     newCard.classList.add('results-card');
     const newTitle = document.createElement('h2');
     newTitle.classList.add('title');
@@ -56,7 +56,10 @@ const showFavorites = () => {
   // console.log(allResults);
   for (let i = 0; i <allResults.length; i++) {
     if (allResults[i].childNodes[2].checked) {
-      allResults[i].classList.add('favourite');
+      allResults[i].classList.toggle('favorite');
+    }
+    else {
+      allResults[i].classList.remove('favorite');
     }
   }
 };

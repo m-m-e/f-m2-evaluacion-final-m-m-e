@@ -1,6 +1,13 @@
-@import 'core/settings';
+@import 'core/variables';
 
 body {
-	background: url('../images/logo-adalab-80px.png') center center no-repeat $color-white;
-	height: 100vh;
+	margin: 0;
+	color: $color-black;
+	font-family: Arial, Helvetica, sans-serif;
+	background: $color-white; 
+}
+
+.favorite {
+	color: $color-purple;
+	background: $color-lightpink;
 }

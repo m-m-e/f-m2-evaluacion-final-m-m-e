@@ -94,12 +94,22 @@ const getSeries = () => {
 const saveFavorites = series => {
   const favouritesList = [];
   const seriesItem = series.childNodes;
-  console.log(seriesItem[0]);
+  console.log(seriesItem);
+
+  
   if (favouritesList.includes(seriesItem[0])){
     console.log('This is already saved');
   }
   else {
     console.log('This needs saving');
+    const seriesName = seriesItem[0].innerHTML;
+    const seriesImage = seriesItem[1].src;
+    const seriesObj = {};
+  
+    seriesObj.name = seriesName;
+    seriesObj.image = seriesImage;
+    favouritesList.push(seriesObj);
+    console.log(favouritesList);
   }
 };
 

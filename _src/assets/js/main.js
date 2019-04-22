@@ -50,22 +50,31 @@ const handler = () => {
 //function to apply style changes to favourites and save in an array
 const makeFavorites = event => {
   const target = event.currentTarget;
-  console.log(target);
   target.classList.toggle('favorite');
   const id = parseInt(target.dataset.id);
-  console.log(id);
-  for (const item of favoritesList) {
-    const x = item.includes(id);
-    console.log(x);
-    if (target.classList.contains('favorite') && x === false) {
+  let doesItInclude = favoritesList.includes(id);
+  console.log(doesItInclude);
+  console.log('id', id);
+  if (favoritesList.length>0) {
+    for (const item of favoritesList) {
+      console.log(item);
+      if (target.classList.contains('favorite')) {
+        favoritesList.push(target);
+        // doesItInclude = favoritesList.includes(id);
+        // console.log(doesItInclude);
+      }
+      else {
+        favoritesList.pop(target);
+      }
+    }
+  }
+  else {
+    if (target.classList.contains('favorite')) {
       favoritesList.push(target);
     }
-    else {
-      favoritesList.pop(target);
-    }
-
   }
-  console.log(favoritesList);
+
+  console.log('faves', favoritesList);
   printFavorites(favoritesList);
 
   // const newFavoritesList = [];

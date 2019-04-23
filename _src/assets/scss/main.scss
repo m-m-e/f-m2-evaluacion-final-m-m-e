@@ -3,22 +3,42 @@
 body {
 	margin: 0;
 	color: $color-black;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: $font-main;
 	background: $color-white; 
 }
 
 .page {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	text-align: center;
 }
 
+.search-box {
+	align-self: flex-start;
+}
+
+//results
 .results-box {
 	display: flex;
 }
 
+.favorites {
+	width: 40vw;
+	list-style: none;
+}
+
+.fave {
+	display: flex;
+	background: $color-lightpink;
+	padding: 10px;
+	margin: 10px;
+}
+
 .results-card {
 	color: $color-lightpink;
-	background: $color-purple;	
+	background: $color-purple;
+	list-style: none;	
 }
 .favorite {
 	color: $color-purple;

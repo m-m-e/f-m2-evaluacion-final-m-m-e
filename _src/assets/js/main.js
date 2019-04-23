@@ -133,7 +133,6 @@ const getSeries = () => {
           }
           seriesData.push(series);
         }
-        console.log('array of series', seriesData);
         showSeries(results, seriesData);
       }
       else {
@@ -143,8 +142,7 @@ const getSeries = () => {
         newMessage.appendChild(newMessageContent);
         results.appendChild(newMessage);
       }
-      showSeries(results, seriesData);
-  });
+    });
 };
 
 

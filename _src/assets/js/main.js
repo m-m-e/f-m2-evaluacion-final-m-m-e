@@ -59,11 +59,11 @@ const showSeries = (container, array) => {
     newCard.classList.add('results-card');
     newCard.setAttribute('data-id', i);
     const newTitle = document.createElement('h2');
-    newTitle.classList.add('title');
+    newTitle.classList.add('results-title');
     const newTitleContent = document.createTextNode(thisSeries.name);
 
     const newImage = document.createElement('img');
-    newImage.classList.add('image');
+    newImage.classList.add('results-image');
     newImage.style = 'height: 200px';
     newImage.setAttribute('alt', thisSeries.name);
     if (thisSeries.image) {

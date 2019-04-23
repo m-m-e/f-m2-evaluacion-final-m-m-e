@@ -63,12 +63,9 @@ const makeFavorites = event => {
   }
 
   printFavorites(favoritesList);
+  saveFavorites(favoritesList);
   
   // checkFavorites();
-  // favoritesList = [...newFavoritesList, ...favoritesList];
-  // console.log(favoritesList);
-  // printFavorites(favoritesList);
-  // saveFavorites(favoritesList);
 };
 
 //function to see if saved data

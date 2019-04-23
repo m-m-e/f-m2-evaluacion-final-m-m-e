@@ -24,21 +24,38 @@ body {
 }
 
 .favorites {
-	width: 40vw;
+	width: 30vw;
 	list-style: none;
 }
 
 .fave {
 	display: flex;
 	background: $color-lightpink;
-	padding: 10px;
-	margin: 10px;
+	margin: 5px;
+	font-size: 12px;
 }
 
+.fave-image {
+	height: 100px;
+	padding: 5px;
+}
+
+.fave-title {
+	align-self: center;
+	margin: 0;
+}
+
+
+.results {
+	width: 60vw;
+	display: flex;
+	flex-wrap: wrap;
+}
 .results-card {
 	color: $color-lightpink;
 	background: $color-purple;
 	list-style: none;	
+	width: 30%;
 }
 .favorite {
 	color: $color-purple;

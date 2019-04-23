@@ -25,7 +25,6 @@ const printFavorites = list => {
 
     const newFaveImage = document.createElement('img');
     newFaveImage.classList.add('fave-image');
-    newFaveImage.style = 'height: 200px';
     newFaveImage.setAttribute('src', item.image);
     newFaveImage.setAttribute('alt', item.title);
 

@@ -114,6 +114,7 @@ const makeFavorites = (event, list) => {
   const target = event.currentTarget;
   target.classList.toggle('favorite');
   const id = parseInt(target.dataset.id);
+  
   if (target.classList.contains('favorite')) {
     const newSeries = {
       id: id,

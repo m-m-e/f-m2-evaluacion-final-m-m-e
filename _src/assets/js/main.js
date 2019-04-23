@@ -13,7 +13,6 @@ let favoritesList = [];
 //check if saved data and print favourites if so
 const printFavorites = list => {
   favorites.innerHTML = '';
-  console.log('faves', list);
   for (let i = 0; i < list.length; i++) {
     const item = list[i];
     const newFave = document.createElement('li');
@@ -39,7 +38,6 @@ const printFavorites = list => {
 const checkFavorites = () => {
   if (savedFavorites) {
     console.log('saved favorites', savedFavorites);
-    console.log('saved favorites list', savedFavoritesList[0]);
     printFavorites(savedFavoritesList[0]);
     return savedFavoritesList;
   }
@@ -95,6 +93,9 @@ const handler = () => {
     makeFavorites(event, favoritesList);
   }
 };
+const saveFavorites = list => {
+  localStorage.setItem('favorites', JSON.stringify(list));
+};
 
 //function to apply style changes to favourites and save in an array
 const makeFavorites = (event, list) => {
@@ -107,19 +108,12 @@ const makeFavorites = (event, list) => {
       title: target.childNodes[0].innerHTML,
       image: target.childNodes[1].src
     };
-    console.log(newSeries);
     list.push(newSeries);
   }
 
   printFavorites(list);
   saveFavorites(list);
-  
 };
-
-const saveFavorites = list => {
-  localStorage.setItem('favorites', JSON.stringify(list));
-};
-
 
 //function to fetch data
 const getSeries = () => {
@@ -149,7 +143,8 @@ const getSeries = () => {
         newMessage.appendChild(newMessageContent);
         results.appendChild(newMessage);
       }
-    });
+      showSeries(results, seriesData);
+  });
 };
 
 

@@ -67,10 +67,16 @@ const showSeries = (container, array) => {
     const newCard = document.createElement('li');
     newCard.classList.add('results-card');
     newCard.setAttribute('data-id', i);
+
     const newTitle = document.createElement('h2');
     newTitle.classList.add('results-title');
     const newTitleContent = document.createTextNode(thisSeries.name);
-
+    for (const item of savedFavorites) {
+      if (item.title === thisSeries.name){
+        newCard.classList.add('favorite');
+      }
+    }
+    
     const newImage = document.createElement('img');
     newImage.classList.add('results-image');
     newImage.style = 'height: 200px';

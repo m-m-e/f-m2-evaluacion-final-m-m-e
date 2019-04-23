@@ -111,6 +111,7 @@ body {
 .results-card {
 	color: $color-lightpink;
 	background: $color-purple;
+	box-shadow: 5px 5px 5px $color-lightgrey;
 	list-style: none;
 	display: flex;
 	flex-direction: column-reverse;

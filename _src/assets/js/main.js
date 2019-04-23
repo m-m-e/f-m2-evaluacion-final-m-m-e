@@ -10,6 +10,7 @@ const savedFavorites = JSON.parse(localStorage.getItem('favorites'));
 let savedFavoritesList = [savedFavorites];
 let favoritesList = [];
 
+
 //check if saved data and print favourites if so
 const printFavorites = list => {
   favorites.innerHTML = '';
@@ -38,6 +39,12 @@ const printFavorites = list => {
     newFave.appendChild(deleteButton);
     favorites.appendChild(newFave);
   }
+  const deleteAll = document.createElement('img');
+  deleteAll.classList.add('delete-all');
+  deleteAll.setAttribute('height', '25px');
+  deleteAll.setAttribute('src', '../assets/images/delete.png');
+  deleteAll.addEventListener('click', deleteEverything);
+  favorites.appendChild(deleteAll);
 };
 
 // function to see if saved data
@@ -180,4 +187,13 @@ function deleteFave(event) {
   console.log(savedFavorites);
   printFavorites(savedFavorites);
   saveFavorites(savedFavorites);  
-};
+}
+
+
+function deleteEverything() {
+  console.log(savedFavorites);
+  savedFavorites.length = 0;
+  console.log(savedFavorites);
+  printFavorites(savedFavorites);
+  saveFavorites(savedFavorites); 
+}

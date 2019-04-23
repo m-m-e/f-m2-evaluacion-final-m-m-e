@@ -52,47 +52,17 @@ const makeFavorites = event => {
   const target = event.currentTarget;
   target.classList.toggle('favorite');
   const id = parseInt(target.dataset.id);
-  let doesItInclude = favoritesList.includes(id);
-  console.log(doesItInclude);
-  console.log('id', id);
-  if (favoritesList.length>0) {
-    for (const item of favoritesList) {
-      console.log(item);
-      if (target.classList.contains('favorite')) {
-        favoritesList.push(target);
-        // doesItInclude = favoritesList.includes(id);
-        // console.log(doesItInclude);
-      }
-      else {
-        favoritesList.pop(target);
-      }
-    }
-  }
-  else {
-    if (target.classList.contains('favorite')) {
-      favoritesList.push(target);
-    }
+  if (target.classList.contains('favorite')) {
+    const newSeries = {
+      id: id,
+      title: target.childNodes[0].innerHTML,
+      image: target.childNodes[1].src
+    };
+    console.log(newSeries);
+    favoritesList.push(newSeries);
   }
 
-  console.log('faves', favoritesList);
   printFavorites(favoritesList);
-
-  // const newFavoritesList = [];
-  // for (let i = 0; i <allResults.length; i++) {
-  //   const seriesItem = allResults[i];
-  //   const newSeries = {
-  //     title: seriesItem.childNodes[0].innerHTML,
-  //     image: seriesItem.childNodes[1].src
-  //   };
-  //   if (seriesItem.childNodes[2].checked) {
-  //     seriesItem.classList.add('favorite');
-  //     newFavoritesList.push(newSeries);
-  //     console.log(newFavoritesList);
-  //   }
-  //   else {
-  //     seriesItem.classList.remove('favorite');
-  //   }
-  // }
   
   // checkFavorites();
   // favoritesList = [...newFavoritesList, ...favoritesList];
@@ -114,18 +84,21 @@ const makeFavorites = event => {
 
 const printFavorites = list => {
   favorites.innerHTML = '';
-  for (const item of list) {
+  console.log('faves', list);
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i];
     const newFave = document.createElement('li');
     newFave.classList.add('fave');
+    newFave.setAttribute('data-id', i);
     const newFaveTitle = document.createElement('h3');
     newFaveTitle.classList.add('fave-title');
-    const newFaveTitleContent = document.createTextNode(item.childNodes[0].innerHTML);
+    const newFaveTitleContent = document.createTextNode(item.title);
 
     const newFaveImage = document.createElement('img');
     newFaveImage.classList.add('fave-image');
     newFaveImage.style = 'height: 200px';
-    newFaveImage.setAttribute('src', item.childNodes[1].currentSrc);
-    newFaveImage.setAttribute('alt', item.childNodes[0].innerHTML);
+    newFaveImage.setAttribute('src', item.image);
+    newFaveImage.setAttribute('alt', item.title);
 
     newFaveTitle.appendChild(newFaveTitleContent);
     newFave.appendChild(newFaveImage);

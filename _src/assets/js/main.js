@@ -10,7 +10,46 @@ const savedFavorites = JSON.parse(localStorage.getItem('favorites'));
 let favoritesList = [];
 
 //check if saved data and print favourites if so
+const printFavorites = list => {
+  favorites.innerHTML = '';
+  console.log('faves', list);
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i];
+    const newFave = document.createElement('li');
+    newFave.classList.add('fave');
+    newFave.setAttribute('data-id', i);
+    const newFaveTitle = document.createElement('h3');
+    newFaveTitle.classList.add('fave-title');
+    const newFaveTitleContent = document.createTextNode(item.title);
 
+    const newFaveImage = document.createElement('img');
+    newFaveImage.classList.add('fave-image');
+    newFaveImage.style = 'height: 200px';
+    newFaveImage.setAttribute('src', item.image);
+    newFaveImage.setAttribute('alt', item.title);
+
+    newFaveTitle.appendChild(newFaveTitleContent);
+    newFave.appendChild(newFaveImage);
+    newFave.appendChild(newFaveTitle);
+    favorites.appendChild(newFave);
+  }
+};
+
+// function to see if saved data
+const checkFavorites = () => {
+  if (savedFavorites) {
+    console.log('saved favorites', savedFavorites);
+    let favoritesList = [savedFavorites];
+    console.log('newlist', favoritesList[0]);
+    printFavorites(favoritesList[0]);
+  }
+  else {
+    console.log('no favorites!');
+  }
+};
+
+checkFavorites();
+    
 //function to print series WITHIN CONTAINER
 const showSeries = (container, array) => {
   container.innerHTML = '';
@@ -65,43 +104,6 @@ const makeFavorites = event => {
   printFavorites(favoritesList);
   saveFavorites(favoritesList);
   
-  // checkFavorites();
-};
-
-//function to see if saved data
-// const checkFavorites = () => {
-//   if (savedFavorites) {
-//     let favoritesList = [savedFavorites];
-//     return favoritesList;
-//   }
-//   else {
-//     return favoritesList;
-//   }
-// };
-
-const printFavorites = list => {
-  favorites.innerHTML = '';
-  console.log('faves', list);
-  for (let i = 0; i < list.length; i++) {
-    const item = list[i];
-    const newFave = document.createElement('li');
-    newFave.classList.add('fave');
-    newFave.setAttribute('data-id', i);
-    const newFaveTitle = document.createElement('h3');
-    newFaveTitle.classList.add('fave-title');
-    const newFaveTitleContent = document.createTextNode(item.title);
-
-    const newFaveImage = document.createElement('img');
-    newFaveImage.classList.add('fave-image');
-    newFaveImage.style = 'height: 200px';
-    newFaveImage.setAttribute('src', item.image);
-    newFaveImage.setAttribute('alt', item.title);
-
-    newFaveTitle.appendChild(newFaveTitleContent);
-    newFave.appendChild(newFaveImage);
-    newFave.appendChild(newFaveTitle);
-    favorites.appendChild(newFave);
-  }
 };
 
 const saveFavorites = list => {

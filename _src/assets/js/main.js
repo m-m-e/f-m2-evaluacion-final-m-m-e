@@ -45,6 +45,10 @@ const printFavorites = list => {
   deleteAll.setAttribute('src', '../assets/images/delete.png');
   deleteAll.addEventListener('click', deleteEverything);
   favorites.appendChild(deleteAll);
+
+  if (savedFavorites.length === 0) {
+    deleteAll.classList.add('hidden');
+  }
 };
 
 // function to see if saved data
@@ -130,9 +134,9 @@ const makeFavorites = (event, list) => {
     };
     list.push(newSeries);
   }
+  saveFavorites(list);
 
   printFavorites(list);
-  saveFavorites(list);
 };
 
 //function to fetch data
@@ -195,5 +199,5 @@ function deleteEverything() {
   savedFavorites.length = 0;
   console.log(savedFavorites);
   printFavorites(savedFavorites);
-  saveFavorites(savedFavorites); 
+  saveFavorites(savedFavorites);
 }

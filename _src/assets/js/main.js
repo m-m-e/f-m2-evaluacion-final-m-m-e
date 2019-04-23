@@ -7,6 +7,7 @@ const results = document.querySelector('.results');
 const favorites = document.querySelector('.favorites');
 const api = 'http://api.tvmaze.com/search/shows?q=';
 const savedFavorites = JSON.parse(localStorage.getItem('favorites'));
+let savedFavoritesList = [savedFavorites];
 let favoritesList = [];
 
 //check if saved data and print favourites if so
@@ -39,9 +40,9 @@ const printFavorites = list => {
 const checkFavorites = () => {
   if (savedFavorites) {
     console.log('saved favorites', savedFavorites);
-    let favoritesList = [savedFavorites];
-    console.log('newlist', favoritesList[0]);
-    printFavorites(favoritesList[0]);
+    console.log('saved favorites list', savedFavoritesList[0]);
+    printFavorites(savedFavoritesList[0]);
+    return savedFavoritesList;
   }
   else {
     console.log('no favorites!');
@@ -83,11 +84,16 @@ const showSeries = (container, array) => {
 };
 
 const handler = () => {
-  makeFavorites(event);
+  if (savedFavorites) {
+    makeFavorites(event, savedFavoritesList[0]);
+  }
+  else {
+    makeFavorites(event, favoritesList);
+  }
 };
 
 //function to apply style changes to favourites and save in an array
-const makeFavorites = event => {
+const makeFavorites = (event, list) => {
   const target = event.currentTarget;
   target.classList.toggle('favorite');
   const id = parseInt(target.dataset.id);
@@ -98,11 +104,11 @@ const makeFavorites = event => {
       image: target.childNodes[1].src
     };
     console.log(newSeries);
-    favoritesList.push(newSeries);
+    list.push(newSeries);
   }
 
-  printFavorites(favoritesList);
-  saveFavorites(favoritesList);
+  printFavorites(list);
+  saveFavorites(list);
   
 };
 

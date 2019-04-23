@@ -27,9 +27,15 @@ const printFavorites = list => {
     newFaveImage.setAttribute('src', item.image);
     newFaveImage.setAttribute('alt', item.title);
 
+    const deleteButton = document.createElement('img');
+    deleteButton.classList.add('delete');
+    deleteButton.setAttribute('src', '../assets/images/delete.png');
+    deleteButton.addEventListener('click', deleteHandler);
+
     newFaveTitle.appendChild(newFaveTitleContent);
     newFave.appendChild(newFaveImage);
     newFave.appendChild(newFaveTitle);
+    newFave.appendChild(deleteButton);
     favorites.appendChild(newFave);
   }
 };
@@ -79,13 +85,13 @@ const showSeries = (container, array) => {
     newTitle.appendChild(newTitleContent);
     newCard.appendChild(newTitle);
     newCard.appendChild(newImage);
-    newCard.addEventListener('click', handler);
+    newCard.addEventListener('click', favoritesHandler);
     
     container.appendChild(newCard);
   }
 };
 
-const handler = () => {
+const favoritesHandler = () => {
   if (savedFavorites) {
     makeFavorites(event, savedFavoritesList[0]);
   }
@@ -154,3 +160,13 @@ input.addEventListener('keyup',function(e){
     getSeries();
   }
 });
+
+//functions to delete favourites
+function deleteHandler(){
+  deleteFave(event);
+}
+
+function deleteFave(event) {
+  const id = parseInt(event.currentTarget.parentElement.dataset.id);
+  console.log(id);
+} 

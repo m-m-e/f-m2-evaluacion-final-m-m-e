@@ -96,6 +96,12 @@ body {
 .fave-title {
 	align-self: center;
 	margin: 0;
+	display: flex;
+}
+
+.delete {
+	height: 15px;
+	padding-left: 20px;
 }
 
 .results {

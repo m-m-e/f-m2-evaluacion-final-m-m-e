@@ -16,15 +16,28 @@ body {
 
 //search
 .search-box {
-	align-self: flex-start;
-	padding-left: 50px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 
 	@media all and (min-width: 768px) {
+		padding-left: 40px;
+		align-self: flex-start;
 		flex-direction: row;
 	}
+}
+
+.label {
+	width: 50%;
+	flex-grow: 1;
+	margin: auto;
+	padding-bottom: 10px;
+
+}
+
+.input {
+	width: 50%;
+	margin: auto;
 }
 
 .btn {

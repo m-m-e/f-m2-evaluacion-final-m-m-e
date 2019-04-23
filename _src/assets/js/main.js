@@ -45,6 +45,11 @@ const checkFavorites = () => {
   }
   else {
     console.log('no favorites!');
+    const newMessage = document.createElement('li');
+    newMessage.classList.add('favorites-message');
+    const newMessageContent = document.createTextNode('No hay favoritos! Añadirlos hacer clic en una serie...');
+    newMessage.appendChild(newMessageContent);
+    favorites.appendChild(newMessage);
   }
 };
 

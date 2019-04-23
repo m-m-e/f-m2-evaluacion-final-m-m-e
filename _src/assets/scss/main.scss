@@ -28,16 +28,17 @@ body {
 }
 
 .label {
-	width: 50%;
-	flex-grow: 1;
-	margin: auto;
-	padding-bottom: 10px;
+	display: none;
 
 }
 
 .input {
 	width: 50%;
 	margin: auto;
+	border: none;
+	border-bottom: 2px solid $color-black;
+	font-family: $font-main;
+	padding: 2px;
 }
 
 .btn {
@@ -135,8 +136,8 @@ body {
 	background: $color-lightpink;
 }
 
-// .results-message {
-// 	list-style: none;
-// 	border: 2px dashed $color-purple;
-// 	padding: 10px;
-// }
+.results-message {
+	list-style: none;
+	border: 2px dashed $color-purple;
+	padding: 10px;
+}

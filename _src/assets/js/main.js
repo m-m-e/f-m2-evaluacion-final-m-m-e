@@ -7,21 +7,53 @@ const results = document.querySelector('.results');
 const favorites = document.querySelector('.favorites');
 const api = 'http://api.tvmaze.com/search/shows?q=';
 const savedFavorites = JSON.parse(localStorage.getItem('favorites'));
+let savedFavoritesList = [savedFavorites];
 let favoritesList = [];
 
+//check if saved data and print favourites if so
+const printFavorites = list => {
+  favorites.innerHTML = '';
+  console.log('faves', list);
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i];
+    const newFave = document.createElement('li');
+    newFave.classList.add('fave');
+    newFave.setAttribute('data-id', i);
+    const newFaveTitle = document.createElement('h3');
+    newFaveTitle.classList.add('fave-title');
+    const newFaveTitleContent = document.createTextNode(item.title);
 
-//function to add listeners to checkboxes
-const checkboxListener = () => {
-  const allCheckboxes = document.querySelectorAll('.checkbox');
-  for (const checkbox of allCheckboxes) {
-    checkbox.addEventListener('change', makeFavorites);
+    const newFaveImage = document.createElement('img');
+    newFaveImage.classList.add('fave-image');
+    newFaveImage.style = 'height: 200px';
+    newFaveImage.setAttribute('src', item.image);
+    newFaveImage.setAttribute('alt', item.title);
+
+    newFaveTitle.appendChild(newFaveTitleContent);
+    newFave.appendChild(newFaveImage);
+    newFave.appendChild(newFaveTitle);
+    favorites.appendChild(newFave);
   }
 };
 
+// function to see if saved data
+const checkFavorites = () => {
+  if (savedFavorites) {
+    console.log('saved favorites', savedFavorites);
+    console.log('saved favorites list', savedFavoritesList[0]);
+    printFavorites(savedFavoritesList[0]);
+    return savedFavoritesList;
+  }
+  else {
+    console.log('no favorites!');
+  }
+};
 
+checkFavorites();
+    
 //function to print series WITHIN CONTAINER
-const showSeries = array => {
-  results.innerHTML = '';
+const showSeries = (container, array) => {
+  container.innerHTML = '';
   for (let i=0; i< array.length; i++) {
     const thisSeries = array[i];
     const newCard = document.createElement('li');
@@ -40,82 +72,44 @@ const showSeries = array => {
     }
     else {
       newImage.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV');
-    }
-
-    const newCheckbox = document.createElement('input');
-    newCheckbox.classList.add('checkbox');
-    newCheckbox.setAttribute('type', 'checkbox');
-    
+    }    
     
     newTitle.appendChild(newTitleContent);
     newCard.appendChild(newTitle);
     newCard.appendChild(newImage);
-    newCard.appendChild(newCheckbox);
-    results.appendChild(newCard);
+    newCard.addEventListener('click', handler);
+    
+    container.appendChild(newCard);
   }
-  checkboxListener();
+};
+
+const handler = () => {
+  if (savedFavorites) {
+    makeFavorites(event, savedFavoritesList[0]);
+  }
+  else {
+    makeFavorites(event, favoritesList);
+  }
 };
 
 //function to apply style changes to favourites and save in an array
-const makeFavorites = () => {
-  const allResults = document.querySelectorAll('.results-card');
-
-  // console.log(allResults);
-  const newFavoritesList = [];
-  for (let i = 0; i <allResults.length; i++) {
-    const seriesItem = allResults[i];
+const makeFavorites = (event, list) => {
+  const target = event.currentTarget;
+  target.classList.toggle('favorite');
+  const id = parseInt(target.dataset.id);
+  if (target.classList.contains('favorite')) {
     const newSeries = {
-      title: seriesItem.childNodes[0].innerHTML,
-      image: seriesItem.childNodes[1].src
+      id: id,
+      title: target.childNodes[0].innerHTML,
+      image: target.childNodes[1].src
     };
-    if (seriesItem.childNodes[2].checked) {
-      seriesItem.classList.add('favorite');
-      newFavoritesList.push(newSeries);
-      console.log(newFavoritesList);
-    }
-    else {
-      seriesItem.classList.remove('favorite');
-    }
+    console.log(newSeries);
+    list.push(newSeries);
   }
+
+  printFavorites(list);
+  saveFavorites(list);
   
-  checkFavorites();
-  favoritesList = [...newFavoritesList, ...favoritesList];
-  console.log(favoritesList);
-  printFavorites(favoritesList);
-  saveFavorites(favoritesList);
-};
-
-//function to see if saved data
-const checkFavorites = () => {
-  if (savedFavorites) {
-    let favoritesList = [savedFavorites];
-    return favoritesList;
-  }
-  else {
-    return favoritesList;
-  }
-};
-
-const printFavorites = list => {
-  favorites.innerHTML = '';
-  for (const item of list) {
-    const newFave = document.createElement('li');
-    newFave.classList.add('fave');
-    const newFaveTitle = document.createElement('h3');
-    newFaveTitle.classList.add('fave-title');
-    const newFaveTitleContent = document.createTextNode(item.title);
-
-    const newFaveImage = document.createElement('img');
-    newFaveImage.classList.add('fave-image');
-    newFaveImage.style = 'height: 200px';
-    newFaveImage.setAttribute('src', item.image);
-    newFaveImage.setAttribute('alt', item.title);
-
-    newFaveTitle.appendChild(newFaveTitleContent);
-    newFave.appendChild(newFaveImage);
-    newFave.appendChild(newFaveTitle);
-    favorites.appendChild(newFave);
-  }
 };
 
 const saveFavorites = list => {
@@ -142,7 +136,7 @@ const getSeries = () => {
         seriesData.push(series);
       }
       console.log('array of series', seriesData);
-      showSeries(seriesData);
+      showSeries(results, seriesData);
     });
 };
 

@@ -3,24 +3,140 @@
 body {
 	margin: 0;
 	color: $color-black;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: $font-main;
 	background: $color-white; 
 }
 
 .page {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	text-align: center;
 }
 
+//search
+.search-box {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	@media all and (min-width: 768px) {
+		padding-left: 40px;
+		align-self: flex-start;
+		flex-direction: row;
+	}
+}
+
+.label {
+	width: 50%;
+	flex-grow: 1;
+	margin: auto;
+	padding-bottom: 10px;
+
+}
+
+.input {
+	width: 50%;
+	margin: auto;
+}
+
+.btn {
+	background: $color-purple;
+	color: $color-white;
+	border: $color-purple;
+	border-radius: 10%;
+	height: 30px;
+	width: 60px;
+	font-family: $font-main;
+	font-weight: bold;
+	margin: 10px;
+}
+
+.favorites-heading {
+	align-self: center;
+	@media all and (min-width:768px) {
+		margin-left: 60px;
+		align-self: flex-start;
+	}
+}
+
+//results
 .results-box {
 	display: flex;
+	flex-direction: column;
+	@media all and (min-width: 768px) {
+		flex-direction: row;
+	}
 }
 
+.favorites {
+	// border: 1px dashed $color-black;
+	list-style: none;
+	padding: 0 20px 20px;
+	margin: auto;
+	@media all and (min-width:768px) {
+		margin: 0 20px;
+		width: 25vw;
+	} 
+}
+
+.fave {
+	display: flex;
+	background: $color-lightpink;
+	margin: 5px;
+	font-size: 12px;
+}
+
+.fave-image {
+	height: 100px;
+	padding: 5px;
+}
+
+.fave-title {
+	align-self: center;
+	margin: 0;
+}
+
+.results {
+	display: grid;
+	grid-template-columns: 1fr;
+	margin: auto;
+	grid-gap: 20px;
+	padding: 0 20px;
+	@media all and (min-width: 860px) {
+		width: 70vw;
+		grid-template-columns: 1fr 1fr;
+	}
+}
 .results-card {
 	color: $color-lightpink;
-	background: $color-purple;	
+	background: $color-purple;
+	box-shadow: 5px 5px 5px $color-lightgrey;
+	list-style: none;
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	@media all and (min-width: 768px) {
+		min-width: 300px;
+	}
+}
+
+.results-title {
+	margin: 10px 0;
+	font-size: 16px;
+}
+
+.results-image {
+	max-width: 250px;
+	margin: 10px 0 0 0;
 }
 .favorite {
 	color: $color-purple;
 	background: $color-lightpink;
+}
+
+.results-message {
+	list-style: none;
+	border: 2px dashed $color-purple;
+	padding: 10px;
 }

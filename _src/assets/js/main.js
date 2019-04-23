@@ -24,7 +24,6 @@ const printFavorites = list => {
 
     const newFaveImage = document.createElement('img');
     newFaveImage.classList.add('fave-image');
-    newFaveImage.style = 'height: 200px';
     newFaveImage.setAttribute('src', item.image);
     newFaveImage.setAttribute('alt', item.title);
 
@@ -44,6 +43,11 @@ const checkFavorites = () => {
   }
   else {
     console.log('no favorites!');
+    const newMessage = document.createElement('li');
+    newMessage.classList.add('favorites-message');
+    const newMessageContent = document.createTextNode('No hay favoritos! Añadirlos hacer clic en una serie...');
+    newMessage.appendChild(newMessageContent);
+    favorites.appendChild(newMessage);
   }
 };
 
@@ -58,11 +62,11 @@ const showSeries = (container, array) => {
     newCard.classList.add('results-card');
     newCard.setAttribute('data-id', i);
     const newTitle = document.createElement('h2');
-    newTitle.classList.add('title');
+    newTitle.classList.add('results-title');
     const newTitleContent = document.createTextNode(thisSeries.name);
 
     const newImage = document.createElement('img');
-    newImage.classList.add('image');
+    newImage.classList.add('results-image');
     newImage.style = 'height: 200px';
     newImage.setAttribute('alt', thisSeries.name);
     if (thisSeries.image) {
@@ -119,18 +123,28 @@ const getSeries = () => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      // console.log(data);
-      for (let i = 0; i < data.length; i++) {
-        const item = data[i].show;
-        const series = {};
-        series.name = item.name;
-        if (item.image !== null) {
-          series.image = item.image.original;
+      if (data.length > 0) {
+        for (let i = 0; i < data.length; i++) {
+          const item = data[i].show;
+          const series = {};
+          series.name = item.name;
+          if (item.image !== null) {
+            series.image = item.image.original;
+          }
+          seriesData.push(series);
         }
-        seriesData.push(series);
+        console.log('array of series', seriesData);
+        showSeries(results, seriesData);
+      }
+      else {
+        const newMessage = document.createElement('li');
+        newMessage.classList.add('results-message');
+        const newMessageContent = document.createTextNode('No hay resultados! Intenta otra vez :)');
+        newMessage.appendChild(newMessageContent);
+        results.appendChild(newMessage);
       }
       showSeries(results, seriesData);
-    });
+  });
 };
 
 

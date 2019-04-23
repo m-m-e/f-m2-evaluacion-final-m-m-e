@@ -14,8 +14,14 @@ body {
 	text-align: center;
 }
 
+//search
 .search-box {
 	align-self: flex-start;
+}
+
+.btn {
+	background: $color-purple;
+	color: $color-lightpink;
 }
 
 //results

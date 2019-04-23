@@ -169,4 +169,11 @@ function deleteHandler(){
 function deleteFave(event) {
   const id = parseInt(event.currentTarget.parentElement.dataset.id);
   console.log(id);
+  if(savedFavorites) {
+    console.log(savedFavorites[id]);
+    // savedFavorites.pop(id);
+  }
+  else {
+    console.log('no faves saved');
+  }
 } 

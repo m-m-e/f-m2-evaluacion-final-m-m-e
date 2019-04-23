@@ -30,7 +30,7 @@ const printFavorites = list => {
 
     const deleteButton = document.createElement('img');
     deleteButton.classList.add('delete');
-    deleteButton.setAttribute('src', '../assets/images/delete.png');
+    deleteButton.setAttribute('src', 'assets/images/delete.png');
     deleteButton.addEventListener('click', deleteHandler);
 
     newFaveTitle.appendChild(newFaveTitleContent);
@@ -42,7 +42,7 @@ const printFavorites = list => {
   const deleteAll = document.createElement('img');
   deleteAll.classList.add('delete-all');
   deleteAll.setAttribute('height', '25px');
-  deleteAll.setAttribute('src', '../assets/images/delete.png');
+  deleteAll.setAttribute('src', 'assets/images/delete.png');
   deleteAll.addEventListener('click', deleteEverything);
   favorites.appendChild(deleteAll);
 

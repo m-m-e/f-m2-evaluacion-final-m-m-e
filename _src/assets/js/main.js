@@ -129,18 +129,26 @@ const getSeries = () => {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      // console.log(data);
-      for (let i = 0; i < data.length; i++) {
-        const item = data[i].show;
-        const series = {};
-        series.name = item.name;
-        if (item.image !== null) {
-          series.image = item.image.original;
+      if (data.length > 0) {
+        for (let i = 0; i < data.length; i++) {
+          const item = data[i].show;
+          const series = {};
+          series.name = item.name;
+          if (item.image !== null) {
+            series.image = item.image.original;
+          }
+          seriesData.push(series);
         }
-        seriesData.push(series);
+        console.log('array of series', seriesData);
+        showSeries(results, seriesData);
       }
-      console.log('array of series', seriesData);
-      showSeries(results, seriesData);
+      else {
+        const newMessage = document.createElement('li');
+        newMessage.classList.add('results-message');
+        const newMessageContent = document.createTextNode('No hay resultados! Intenta otra vez :)');
+        newMessage.appendChild(newMessageContent);
+        results.appendChild(newMessage);
+      }
     });
 };
 

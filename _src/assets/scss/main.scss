@@ -55,11 +55,21 @@ body {
 //results
 .results-box {
 	display: flex;
+	flex-direction: column;
+	@media all and (min-width: 768px) {
+		flex-direction: row;
+	}
 }
 
 .favorites {
-	width: 30vw;
+	// border: 1px dashed $color-black;
 	list-style: none;
+	padding: 0 20px 20px;
+	margin: auto;
+	@media all and (min-width:768px) {
+		margin: 0 20px;
+		width: 25vw;
+	} 
 }
 
 .fave {
@@ -80,19 +90,26 @@ body {
 }
 
 .results {
-	width: 60vw;
-	display: flex;
-	flex-wrap: wrap;
+	display: grid;
+	grid-template-columns: 1fr;
+	margin: auto;
+	grid-gap: 20px;
+	padding: 0 20px;
+	@media all and (min-width: 860px) {
+		width: 70vw;
+		grid-template-columns: 1fr 1fr;
+	}
 }
 .results-card {
-	margin: 5px;
 	color: $color-lightpink;
 	background: $color-purple;
-	list-style: none;	
-	width: 45%;
+	list-style: none;
 	display: flex;
 	flex-direction: column-reverse;
 	align-items: center;
+	@media all and (min-width: 768px) {
+		min-width: 300px;
+	}
 }
 
 .results-title {

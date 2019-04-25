@@ -53,8 +53,7 @@ const printFavorites = list => {
 
 // function to see if saved data
 const checkFavorites = () => {
-  if (savedFavorites) {
-    console.log('saved favorites', savedFavorites);
+  if (savedFavorites.length !== 0) {
     printFavorites(savedFavoritesList[0]);
     return savedFavoritesList;
   }
@@ -110,10 +109,10 @@ const showSeries = (container, array) => {
 
 const favoritesHandler = () => {
   if (savedFavorites) {
-    makeFavorites(event, savedFavoritesList[0]);
+    makeFavorites(savedFavoritesList[0]);
   }
   else {
-    makeFavorites(event, favoritesList);
+    makeFavorites(favoritesList);
   }
 };
 const saveFavorites = list => {
@@ -121,7 +120,7 @@ const saveFavorites = list => {
 };
 
 //function to apply style changes to favourites and save in an array
-const makeFavorites = (event, list) => {
+const makeFavorites = (list) => {
   const target = event.currentTarget;
   target.classList.toggle('favorite');
   const id = parseInt(target.dataset.id);
@@ -186,18 +185,26 @@ function deleteHandler(){
 
 function deleteFave(event) {
   const id = parseInt(event.currentTarget.parentElement.dataset.id);
-  console.log(id);
   const deleted = savedFavorites.splice(id, 1);
-  console.log(savedFavorites);
+  console.log(deleted[0].title);
   printFavorites(savedFavorites);
-  saveFavorites(savedFavorites);  
+  saveFavorites(savedFavorites);
+  const results = document.querySelectorAll('.results-card');
+  for (const item of results) {
+    if (item.childNodes[0].innerHTML === deleted[0].title){
+      item.classList.remove('favorite');
+    }
+  }
 }
 
 
 function deleteEverything() {
-  console.log(savedFavorites);
   savedFavorites.length = 0;
-  console.log(savedFavorites);
   printFavorites(savedFavorites);
   saveFavorites(savedFavorites);
+  checkFavorites();
+  const results = document.querySelectorAll('.results-card');
+  for (const item of results) {
+    item.classList.remove('favorite');
+  }
 }

@@ -6,7 +6,7 @@ const button = document.querySelector('.btn');
 const results = document.querySelector('.results');
 const favorites = document.querySelector('.favorites');
 const api = 'http://api.tvmaze.com/search/shows?q=';
-const savedFavorites = JSON.parse(localStorage.getItem('favorites'));
+const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
 let savedFavoritesList = [savedFavorites];
 let favoritesList = [];
 
@@ -187,7 +187,7 @@ function deleteHandler(){
 function deleteFave(event) {
   const id = parseInt(event.currentTarget.parentElement.dataset.id);
   console.log(id);
-  const deleted = savedFavorites.splice(id, 1);
+  savedFavorites.splice(id, 1);
   console.log(savedFavorites);
   printFavorites(savedFavorites);
   saveFavorites(savedFavorites);  

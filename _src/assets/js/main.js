@@ -6,9 +6,12 @@ const button = document.querySelector('.btn');
 const results = document.querySelector('.results');
 const favorites = document.querySelector('.favorites');
 const api = 'http://api.tvmaze.com/search/shows?q=';
-const savedFavorites = JSON.parse(localStorage.getItem('favorites'));
-let savedFavoritesList = [savedFavorites];
+const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+// const savedFavorites = [];
+let savedFavoritesList = savedFavorites;
 let favoritesList = [];
+const resultsNumber = document.querySelector('.results-number');
+const testNumbers = [5, 8, 10];
 
 
 //check if saved data and print favourites if so
@@ -55,7 +58,7 @@ const printFavorites = list => {
 const checkFavorites = () => {
   if (savedFavorites) {
     console.log('saved favorites', savedFavorites);
-    printFavorites(savedFavoritesList[0]);
+    printFavorites(savedFavoritesList);
     return savedFavoritesList;
   }
   else {
@@ -82,11 +85,18 @@ const showSeries = (container, array) => {
     const newTitle = document.createElement('h2');
     newTitle.classList.add('results-title');
     const newTitleContent = document.createTextNode(thisSeries.name);
-    for (const item of savedFavorites) {
-      if (item.title === thisSeries.name){
-        newCard.classList.add('favorite');
+    if (savedFavorites) {
+      for (const item of savedFavorites) {
+        if (item.title === thisSeries.name){
+          newCard.classList.add('favorite');
+        }
       }
     }
+
+    const newParagraph = document.createElement('time');
+    newParagraph.classList.add('date');
+    const newParagraphContent = document.createTextNode(thisSeries.premiered);
+    newParagraph.appendChild(newParagraphContent);
     
     const newImage = document.createElement('img');
     newImage.classList.add('results-image');
@@ -102,6 +112,7 @@ const showSeries = (container, array) => {
     newTitle.appendChild(newTitleContent);
     newCard.appendChild(newTitle);
     newCard.appendChild(newImage);
+    newCard.appendChild(newParagraph);
     newCard.addEventListener('click', favoritesHandler);
     
     container.appendChild(newCard);
@@ -139,6 +150,24 @@ const makeFavorites = (event, list) => {
   printFavorites(list);
 };
 
+const compareNumber = () => {
+  for (const number of testNumbers) {
+    if (parseInt(resultsNumber.innerHTML) >= number) {
+      console.log(`Hay ${resultsNumber.innerHTML} resultados y el número es mayor que ${number}`);
+    }
+    else {
+      console.log(`Hay ${resultsNumber.innerHTML} resultados y el número es menor que ${number}`);
+    }
+  }
+}
+
+
+const showResultsNumber = array => {
+  resultsNumber.innerHTML = array.length;
+  resultsNumber.addEventListener('click', compareNumber);
+}
+
+
 //function to fetch data
 const getSeries = () => {
   const search = input.value;
@@ -152,12 +181,14 @@ const getSeries = () => {
           const item = data[i].show;
           const series = {};
           series.name = item.name;
+          series.premiered = item.premiered;
           if (item.image !== null) {
             series.image = item.image.original;
           }
           seriesData.push(series);
         }
         showSeries(results, seriesData);
+        showResultsNumber(seriesData);
       }
       else {
         const newMessage = document.createElement('li');

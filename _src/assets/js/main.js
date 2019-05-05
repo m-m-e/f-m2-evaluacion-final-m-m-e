@@ -5,13 +5,19 @@ const input = document.querySelector('#search');
 const button = document.querySelector('.btn');
 const results = document.querySelector('.results');
 const favorites = document.querySelector('.favorites');
+const messageBox = document.querySelector('.messages');
 const api = 'http://api.tvmaze.com/search/shows?q=';
 const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
 let savedFavoritesList = savedFavorites;
 let favoritesList = [];
 
+const countResults = array => {
+  const numberOfResults = array.length;
+  messageBox.innerHTML = `Número de resultados: ${numberOfResults}`;
+};
 
-//check if saved data and print favourites if so
+
+//Print favourites if so
 const printFavorites = list => {
   favorites.innerHTML = '';
   for (let i = 0; i < list.length; i++) {
@@ -73,6 +79,7 @@ checkFavorites();
 //function to print series WITHIN CONTAINER
 const showSeries = (container, array) => {
   container.innerHTML = '';
+  countResults(array);
   for (let i=0; i< array.length; i++) {
     const thisSeries = array[i];
     const newCard = document.createElement('li');

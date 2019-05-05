@@ -7,7 +7,7 @@ const results = document.querySelector('.results');
 const favorites = document.querySelector('.favorites');
 const api = 'http://api.tvmaze.com/search/shows?q=';
 const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-let savedFavoritesList = [savedFavorites];
+let savedFavoritesList = savedFavorites;
 let favoritesList = [];
 
 
@@ -55,7 +55,7 @@ const printFavorites = list => {
 const checkFavorites = () => {
   if (savedFavorites) {
     console.log('saved favorites', savedFavorites);
-    printFavorites(savedFavoritesList[0]);
+    printFavorites(savedFavoritesList);
     return savedFavoritesList;
   }
   else {
@@ -69,7 +69,7 @@ const checkFavorites = () => {
 };
 
 checkFavorites();
-    
+
 //function to print series WITHIN CONTAINER
 const showSeries = (container, array) => {
   container.innerHTML = '';
@@ -87,7 +87,7 @@ const showSeries = (container, array) => {
         newCard.classList.add('favorite');
       }
     }
-    
+
     const newImage = document.createElement('img');
     newImage.classList.add('results-image');
     newImage.style = 'height: 200px';
@@ -97,20 +97,20 @@ const showSeries = (container, array) => {
     }
     else {
       newImage.setAttribute('src', 'https://via.placeholder.com/210x295/ffffff/666666/?text=TV');
-    }    
-    
+    }
+
     newTitle.appendChild(newTitleContent);
     newCard.appendChild(newTitle);
     newCard.appendChild(newImage);
     newCard.addEventListener('click', favoritesHandler);
-    
+
     container.appendChild(newCard);
   }
 };
 
 const favoritesHandler = () => {
   if (savedFavorites) {
-    makeFavorites(event, savedFavoritesList[0]);
+    makeFavorites(event, savedFavoritesList);
   }
   else {
     makeFavorites(event, favoritesList);
@@ -124,11 +124,9 @@ const saveFavorites = list => {
 const makeFavorites = (event, list) => {
   const target = event.currentTarget;
   target.classList.toggle('favorite');
-  const id = parseInt(target.dataset.id);
-  
+
   if (target.classList.contains('favorite')) {
     const newSeries = {
-      id: id,
       title: target.childNodes[0].innerHTML,
       image: target.childNodes[1].src
     };
@@ -186,18 +184,15 @@ function deleteHandler(){
 
 function deleteFave(event) {
   const id = parseInt(event.currentTarget.parentElement.dataset.id);
-  console.log(id);
   savedFavorites.splice(id, 1);
   console.log(savedFavorites);
   printFavorites(savedFavorites);
-  saveFavorites(savedFavorites);  
+  saveFavorites(savedFavorites);
 }
 
 
 function deleteEverything() {
-  console.log(savedFavorites);
   savedFavorites.length = 0;
-  console.log(savedFavorites);
   printFavorites(savedFavorites);
   saveFavorites(savedFavorites);
 }

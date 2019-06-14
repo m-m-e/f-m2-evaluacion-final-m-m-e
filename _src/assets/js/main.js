@@ -171,7 +171,10 @@ const getSeries = () => {
         newMessage.appendChild(newMessageContent);
         results.appendChild(newMessage);
       }
-    });
+    })
+  .catch(error){
+    console.error(error);
+  }
 };
 
 
